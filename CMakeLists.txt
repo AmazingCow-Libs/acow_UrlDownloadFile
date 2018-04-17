@@ -20,17 +20,19 @@
 
 cmake_minimum_required(VERSION 3.5)
 
+
 ##----------------------------------------------------------------------------##
-## Project Settings                                                           ##
+## Project                                                                    ##
 ##----------------------------------------------------------------------------##
-set(PROJECT "acow_URLDownloadFile")
+set(PROJECT acow_URLDownloadFile)
 project(${PROJECT})
 
 
 ##----------------------------------------------------------------------------##
 ## Sources                                                                    ##
 ##----------------------------------------------------------------------------##
-include_directories(acow)
+##------------------------------------------------------------------------------
+## Sources
 set(SOURCES
     acow/src/win32_URLDownloadFile.cpp
 )
@@ -41,13 +43,14 @@ set(SOURCES
 ##----------------------------------------------------------------------------##
 ##------------------------------------------------------------------------------
 ## Lib.
-add_library(${PROJECT} ${SOURCES})
+add_executable(${PROJECT} ${SOURCES})
 
-##------------------------------------------------------------------------------
+##-----------------------------------------------------------------------------
 ## Include directories.
 target_include_directories(${PROJECT} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-
 ##------------------------------------------------------------------------------
 ## Dependencies.
+target_link_libraries(${PROJECT} LINK_PUBLIC acow_c_goodies)
 target_link_libraries(${PROJECT} LINK_PUBLIC acow_cpp_goodies)
+target_link_libraries(${PROJECT} LINK_PUBLIC acow_IO)
